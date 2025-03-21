@@ -6,7 +6,7 @@
       ansible.builtin.dnf:
         name: https://repo.zabbix.com/zabbix/7.2/release/rhel/9/noarch/zabbix-release-latest-7.2.el9.noarch.rpm
         state: present
-        disable_gpg_check: True
+        disable_gpg_check: true
 
     - name: Install zabbix agent
       ansible.builtin.dnf:
@@ -21,8 +21,7 @@
         dest: /etc/zabbix/zabbix_agentd.conf
         owner: root
         group: root
-        mode: 0644
-
+        mode: "0644"
 
 - name: Deploy zabbix agent for Ubuntu jammy machines
   when: ansible_distribution == "Ubuntu"
@@ -33,7 +32,7 @@
         dest: /tmp/zabbix-release_latest_7.2+ubuntu22.04_all.deb
         owner: root
         group: root
-        mode: 0755
+        mode: "0755"
 
     - name: Create zabbix dnf repo
       ansible.builtin.apt:
@@ -52,7 +51,7 @@
         dest: /etc/zabbix/zabbix_agentd.conf
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"
 
 - name: Ensure zabbix agent is started and enabled
   ansible.builtin.service:
