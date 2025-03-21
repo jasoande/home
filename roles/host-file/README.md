@@ -1,38 +1,11 @@
-Role Name
-=========
+This Ansible role copies a new "host" file into place, backing up the original if it differs from the copied version. It also moves the hosts file to Jasona's home directory and ensures that the host file is updated with other hosts information.
 
-A brief description of the role goes here.
+This Ansible role assumes that the "files/hosts" file exists and contains the necessary host information.
 
-Requirements
-------------
+This file does not contain any variables or configurations.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This task copies a new "host" file into place, backing up the original if it differs from the copied version. The "src" parameter specifies the source file, the "dest" parameter specifies the destination file, the "owner", "group", and "mode" parameters specify the file permissions, and the "backup" parameter specifies that a backup of the original file should be created if it differs from the copied version.
 
-Role Variables
---------------
+This task moves the hosts file to Jasona's home directory. The "src" parameter specifies the source file, the "dest" parameter specifies the destination file, the "owner", "group", and "mode" parameters specify the file permissions, and the "remote_src" parameter specifies that the source file should be deleted after it is copied.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+This task ensures that the host file is updated with other hosts information. The "path" parameter specifies the file to modify, the "block" parameter specifies the content to add to the file, and the "my_host" variable is assumed to contain the necessary host information.
