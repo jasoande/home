@@ -1,9 +1,0 @@
----
-# vars file for host-file
-my_host: |
-  192.168.1.200    pve.mynetworksettings.com pve.mynetworksettings pve
-  192.168.1.183    kodi.mynetworksettings.com kodi.mynetworksettings kodi
-  192.168.1.193    rhel.mynetworksettings.com rhel.mynetworksettings rhel
-  192.168.1.192    unified.mynetworksettings.com unified.mynetworksettings unified
-  192.168.1.173    zabbix.mynetworksettings.com zabbix.mynetworksettings zabbix
-  192.168.1.178    satellite.mynetworksettings.com satellite.mynetworksettings satellite
