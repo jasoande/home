@@ -1,0 +1,5 @@
+- name: Install zabbix repo and then install and configure zabbix agent
+  hosts: all
+  become: true
+  roles:
+    - zabbix-agent

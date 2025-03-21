@@ -1,0 +1,61 @@
+---
+- name: Deploy zabbix agent for RHEL 9 machines
+  when: ansible_distribution == "RedHat"
+  block:
+    - name: Download zabbix release rpm and extract to create zabbix repo
+      ansible.builtin.dnf:
+        name: https://repo.zabbix.com/zabbix/7.2/release/rhel/9/noarch/zabbix-release-latest-7.2.el9.noarch.rpm
+        state: present
+        disable_gpg_check: True
+
+    - name: Install zabbix agent
+      ansible.builtin.dnf:
+        name: zabbix-agent
+        state: present
+
+    - name: Copy zabbix_agentd.conf into place /etc/zabbix/
+      notify:
+        - Restart zabbix
+      ansible.builtin.copy:
+        src: zabbix_agentd.conf
+        dest: /etc/zabbix/zabbix_agentd.conf
+        owner: root
+        group: root
+        mode: 0644
+
+
+- name: Deploy zabbix agent for Ubuntu jammy machines
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Download zabbix.deb
+      ansible.builtin.get_url:
+        url: https://repo.zabbix.com/zabbix/7.2/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.2+ubuntu22.04_all.deb
+        dest: /tmp/zabbix-release_latest_7.2+ubuntu22.04_all.deb
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Create zabbix dnf repo
+      ansible.builtin.apt:
+        deb: /tmp/zabbix-release_latest_7.2+ubuntu22.04_all.deb
+
+    - name: Install zabix-agent package from zabbix repo
+      ansible.builtin.apt:
+        name: zabbix-agent
+        state: present
+
+    - name: Copy zabbix_agentd.conf into place
+      notify:
+        - Restart zabbix
+      ansible.builtin.copy:
+        src: files/zabbix_agentd.conf
+        dest: /etc/zabbix/zabbix_agentd.conf
+        owner: root
+        group: root
+        mode: 0644
+
+- name: Ensure zabbix agent is started and enabled
+  ansible.builtin.service:
+    name: zabbix-agent
+    state: started
+    enabled: true

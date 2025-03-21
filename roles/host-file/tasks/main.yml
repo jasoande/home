@@ -1,0 +1,14 @@
+---
+- name: Move hosts file to jasona home dir
+  ansible.builtin.copy:
+    src: /etc/hosts
+    dest: /var/tmp/hosts
+    owner: root
+    group: root
+    mode: '0644'
+    remote_src: true
+
+- name: Ensure host file is updated with other hosts information
+  ansible.builtin.blockinfile:
+    path: /etc/hosts
+    block: "{{ my_host }}"

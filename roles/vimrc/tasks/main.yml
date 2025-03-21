@@ -1,0 +1,5 @@
+---
+- name: Copy .vimrc into place
+  ansible.builtin.copy:
+    src: files/.vimrc
+    dest: ~/.vimrc

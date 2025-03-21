@@ -1,0 +1,5 @@
+---
+- name: Replace .vimrc file
+  hosts: all
+  roles:
+    - vimrc

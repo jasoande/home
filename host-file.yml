@@ -1,0 +1,6 @@
+---
+- name: Updates /etc/host file adding local linux entries
+  hosts: all
+  become: true
+  roles:
+    - host-file
