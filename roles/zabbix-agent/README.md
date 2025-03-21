@@ -1,38 +1,21 @@
-Role Name
-=========
+The role deploys the Zabbix agent on RHEL 9 and Ubuntu jammy machines.
 
-A brief description of the role goes here.
+This file does not have any variables.
 
-Requirements
-------------
+This file contains the tasks that are executed by the role.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+The first task downloads the Zabbix release rpm and extracts it to create a Zabbix repository.
 
-Role Variables
---------------
+The second task installs the Zabbix agent.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The third task copies the zabbix_agentd.conf file into place and restarts the Zabbix agent.
 
-Dependencies
-------------
+The first task downloads the zabbix.deb file.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+The second task creates a Zabbix repository.
 
-Example Playbook
-----------------
+The third task installs the zabix-agent package from the Zabbix repository.
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+The fourth task copies the zabbix_agentd.conf file into place and restarts the Zabbix agent.
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+The last task ensures that the Zabbix agent is started and enabled to start on boot.
