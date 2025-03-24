@@ -5,7 +5,7 @@
     dest: /var/tmp/hosts
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
     remote_src: true
 
 - name: Ensure host file is updated with other hosts information
